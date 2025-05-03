@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const activebutton = ({ isActive }) =>
-    isActive && "text-[#23BE0A] font-bold border border-[#23BE0A]";
+    isActive ? "text-[#23BE0A] font-bold border border-[#23BE0A]" : undefined;
 
   const link = (
     <>
