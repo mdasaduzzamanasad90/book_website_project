@@ -29,6 +29,7 @@ const BookDetails = () => {
     rating,
   } = job;
 
+// function read button
   const readbuttonclick = () => {
     const data = getlocalstorgedata();
     const exgest = data.find(book => book === id);
@@ -41,6 +42,8 @@ const BookDetails = () => {
     }
 
   };
+
+  // function wishlish button
   const wishlistbuttonclick = () => {
     const data = getlocalstorgedata();
     const exgest = data.find(book => book === id);
