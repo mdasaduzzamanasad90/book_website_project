@@ -29,42 +29,37 @@ const BookDetails = () => {
     rating,
   } = job;
 
-// function read button
+  // function read button
   const readbuttonclick = () => {
     const data = getlocalstorgedata();
-    const exgest = data.find(book => book === id);
+    const exgest = data.find((book) => book === id);
     if (exgest) {
       notify2();
-    }
-    else{
+    } else {
       localstoragedatabooks(id);
       notify();
     }
-
   };
 
   // function wishlish button
-  const wishlistbuttonclick = () => {
+  const wishlistbuttonclick = () => {;
     const data = getlocalstorgedata();
-    const exgest = data.find(book => book === id);
+    const exgest = data.find((book) => book === id);
     const wishdata = wishlistlocaldata();
-    const wishexgest = wishdata.find(book=>book ===id);
+    const wishexgest = wishdata.find((book) => book === id);
     if (exgest) {
       notify2();
-    }
-    else if (wishexgest) {
-      notify3()
-    }
-    else{
+    } else if (wishexgest) {
+      notify3();
+    } else {
       wishlistlocalstoragedatabooks(id);
       notify1();
     }
-
   };
 
   return (
-    <div className="md:flex items-center md:mt-20 mt-10">
-      <div>
+    <div className="md:flex items-center md:mt-20 mt-10 border rounded-xl p-10">
+      <div className="bg-[#1313130D] rounded-xl md:mr-10">
         <img src={image} alt="" />
       </div>
       <div>
@@ -106,10 +101,16 @@ const BookDetails = () => {
           </div>
         </div>
         <div className="flex gap-5">
-          <button onClick={readbuttonclick} className="btn">
+          <button
+            onClick={readbuttonclick}
+            className="btn rounded-lg"
+          >
             Read
           </button>
-          <button onClick={wishlistbuttonclick} className="btn">
+          <button
+            onClick={wishlistbuttonclick}
+            className="btn rounded-lg"
+          >
             Wishlist
           </button>
         </div>
