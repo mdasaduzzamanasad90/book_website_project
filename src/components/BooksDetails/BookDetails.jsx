@@ -1,7 +1,18 @@
 import { useLoaderData, useParams } from "react-router-dom";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import {
+  getlocalstorgedata,
+  localstoragedatabooks,
+  wishlistlocaldata,
+  wishlistlocalstoragedatabooks,
+} from "../utilities/localstorage";
 
 const BookDetails = () => {
   const bookdetailsdata = useLoaderData();
+  const notify = () => toast.success("This Book You Read ! Successfully");
+  const notify1 = () => toast.success("This Book Add Wishlist ! Successfully");
+  const notify2 = () => toast.error("Sorry ! You Have Already Read");
+  const notify3 = () => toast.error("Sorry ! You Have Already Add Wishlist");
 
   const { id } = useParams();
   const idInt = parseInt(id);
@@ -17,6 +28,37 @@ const BookDetails = () => {
     yearOfPublishing,
     rating,
   } = job;
+
+  const readbuttonclick = () => {
+    const data = getlocalstorgedata();
+    const exgest = data.find(book => book === id);
+    if (exgest) {
+      notify2();
+    }
+    else{
+      localstoragedatabooks(id);
+      notify();
+    }
+
+  };
+  const wishlistbuttonclick = () => {
+    const data = getlocalstorgedata();
+    const exgest = data.find(book => book === id);
+    const wishdata = wishlistlocaldata();
+    const wishexgest = wishdata.find(book=>book ===id);
+    if (exgest) {
+      notify2();
+    }
+    else if (wishexgest) {
+      notify3()
+    }
+    else{
+      wishlistlocalstoragedatabooks(id);
+      notify1();
+    }
+
+  };
+
   return (
     <div className="md:flex items-center md:mt-20 mt-10">
       <div>
@@ -61,10 +103,27 @@ const BookDetails = () => {
           </div>
         </div>
         <div className="flex gap-5">
-          <button className="btn">Read</button>
-          <button className="btn">Wishlist</button>
+          <button onClick={readbuttonclick} className="btn">
+            Read
+          </button>
+          <button onClick={wishlistbuttonclick} className="btn">
+            Wishlist
+          </button>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
     </div>
   );
 };
