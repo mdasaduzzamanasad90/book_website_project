@@ -12,31 +12,35 @@ import Error from "./components/Error/Error";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root></Root>,
-    errorElement: <Error></Error>,
+    element: <Root />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
-        loader: () => fetch("../public/BookData/BookData.json"),
+        element: <Home />,
+        loader: () =>
+          fetch("/BookData/BookData.json").then((res) => res.json()),
       },
       {
         path: "/bookdetails/:id",
-        element: <BookDetails></BookDetails>,
-        loader: () => fetch("../public/BookData/BookData.json"),
+        element: <BookDetails />,
+        loader: () =>
+          fetch("/BookData/BookData.json").then((res) => res.json()),
       },
       {
         path: "/listedbooks",
-        element: <ListedBooks></ListedBooks>,
-        loader: ()=> fetch("../public/BookData/BookData.json"),
+        element: <ListedBooks />,
+        loader: () =>
+          fetch("/BookData/BookData.json").then((res) => res.json()),
       },
       {
         path: "/pagestoread",
-        element: <PagesToRead></PagesToRead>,
+        element: <PagesToRead />,
       },
     ],
   },
 ]);
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
